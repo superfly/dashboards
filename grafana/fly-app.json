@@ -715,7 +715,7 @@
             "uid": "prometheus_on_fly"
           },
           "editorMode": "code",
-          "expr": "topk_max(10, fly_instance_memory_mem_total{app=\"$app\"} - fly_instance_memory_mem_available{app=\"$app\"})",
+          "expr": "fly_instance_memory_mem_total{app=\"$app\"} - fly_instance_memory_mem_available{app=\"$app\"}",
           "hide": false,
           "legendFormat": "{{instance}} - {{region}}",
           "range": true,
@@ -808,7 +808,7 @@
             "uid": "prometheus_on_fly"
           },
           "editorMode": "code",
-          "expr": "topk_avg(10, \n  sum(increase(fly_instance_cpu{app=\"$app\", mode!=\"idle\"}[60s]))by(instance, region)/60 / \n  sum(count(fly_instance_cpu{app=\"$app\", mode=\"idle\"})without(cpu))by(instance, region)\n)",
+          "expr": "sum(increase(fly_instance_cpu{app=\"$app\", mode!=\"idle\"}[60s]))by(instance, region)/60 / \n  sum(count(fly_instance_cpu{app=\"$app\", mode=\"idle\"})without(cpu))by(instance, region)",
           "legendFormat": "{{instance}} - {{region}}",
           "range": true,
           "refId": "A"
@@ -904,7 +904,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "topk_avg(10,\n  sum(fly_app_concurrency{app=\"$app\"})by(instance, region)\n)",
+          "expr": "sum(fly_app_concurrency{app=\"$app\"})by(instance, region)",
           "instant": false,
           "key": "Q-e9a914b6-955e-4cf9-b71d-48e74f8b0632-0",
           "legendFormat": "{{instance}} - {{region}}",
@@ -1002,7 +1002,7 @@
             "uid": "prometheus_on_fly"
           },
           "editorMode": "code",
-          "expr": "topk_avg(10,\n  sum(fly_instance_load_average{app=\"$app\",minutes=\"5\"})by(instance, region) /\n  sum(count(fly_instance_cpu{app=\"$app\", mode=\"idle\"})without(cpu))by(instance, region)\n)",
+          "expr": "sum(fly_instance_load_average{app=\"$app\",minutes=\"5\"})by(instance, region) /\n  sum(count(fly_instance_cpu{app=\"$app\", mode=\"idle\"})without(cpu))by(instance, region)",
           "hide": false,
           "legendFormat": "{{instance}} - {{region}}",
           "range": true,
@@ -1506,7 +1506,7 @@
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
-              "expr": "topk_avg(10,\n  sum(increase(fly_app_http_response_time_seconds_sum{app=\"$app\"}))by(instance,region)/sum(increase(fly_app_http_response_time_seconds_count{app=\"$app\"}))by(instance,region)\n)",
+              "expr": "sum(increase(fly_app_http_response_time_seconds_sum{app=\"$app\"}))by(instance,region)/sum(increase(fly_app_http_response_time_seconds_count{app=\"$app\"}))by(instance,region)",
               "hide": false,
               "legendFormat": "{{instance}} - {{region}}",
               "range": true,
