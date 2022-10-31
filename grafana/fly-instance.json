@@ -3438,8 +3438,8 @@
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
-              "expr": "fly_volume_size_bytes{app=\"$app\"}",
-              "legendFormat": "{{name}} ({{id}}) - Total",
+              "expr": "fly_instance_filesystem_blocks{app=\"$app\", instance=\"$instance\", mount!=\"/\"} * fly_instance_filesystem_block_size{app=\"$app\", instance=\"$instance\", mount!=\"/\"}",
+              "legendFormat": "{{mount}} ({{instance}} - {{region}}) Total",
               "range": true,
               "refId": "A"
             },
@@ -3449,9 +3449,9 @@
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
-              "expr": "fly_volume_used_pct{app=\"$app\"} / 100 * fly_volume_size_bytes{app=\"$app\"}",
+              "expr": "fly_instance_filesystem_blocks{app=\"$app\", instance=\"$instance\", mount!=\"/\"} * fly_instance_filesystem_block_size{app=\"$app\", instance=\"$instance\", mount!=\"/\"} - fly_instance_filesystem_blocks_avail{app=\"$app\", instance=\"$instance\", mount!=\"/\"} * fly_instance_filesystem_block_size{app=\"$app\", instance=\"$instance\", mount!=\"/\"}",
               "hide": false,
-              "legendFormat": "{{name}} ({{id}}) - Used",
+              "legendFormat": "{{mount}} ({{instance}} - {{region}}) Used",
               "range": true,
               "refId": "B"
             }
