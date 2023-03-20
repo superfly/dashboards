@@ -495,7 +495,7 @@
               },
               "editorMode": "code",
               "expr": "increase(fly_app_hard_limit_reached_count{app=~\"$app\",instance=~\"$instance\"}) > 0",
-              "legendFormat": "__auto",
+              "legendFormat": "count",
               "range": true,
               "refId": "A"
             }
