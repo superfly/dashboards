@@ -2477,7 +2477,7 @@
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
-              "expr": "rate(fly_instance_net_recv_bytes{device='eth0', instance=\"$instance\"}) * 8",
+              "expr": "rate(fly_instance_net_sent_bytes{device='eth0', instance=\"$instance\"}) * 8",
               "hide": false,
               "legendFormat": "sent",
               "range": true,
