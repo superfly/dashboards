@@ -45,6 +45,7 @@
   "liveNow": false,
   "panels": [
     {
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -52,6 +53,56 @@
         "y": 0
       },
       "id": 30,
+      "panels": [
+        {
+          "datasource": {
+            "type": "quickwit-quickwit-datasource",
+            "uid": "application_logs"
+          },
+          "description": "",
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 31,
+          "links": [],
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": false
+          },
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "quickwit-quickwit-datasource",
+                "uid": "application_logs"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "limit": "100"
+                  },
+                  "type": "logs"
+                }
+              ],
+              "query": "fly.app.name:\"$app\"",
+              "refId": "A",
+              "timeField": ""
+            }
+          ],
+          "type": "logs"
+        }
+      ],
       "title": "Logs",
       "type": "row"
     },
@@ -1149,7 +1200,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 2
+            "y": 10
           },
           "id": 3,
           "options": {
@@ -1228,7 +1279,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 2
+            "y": 10
           },
           "id": 18,
           "options": {
@@ -1414,7 +1465,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 12
+            "y": 20
           },
           "id": 13,
           "options": {
@@ -1516,7 +1567,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 12
+            "y": 20
           },
           "id": 21,
           "interval": "1m",
@@ -1624,7 +1675,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 3
+            "y": 11
           },
           "id": 27,
           "options": {
