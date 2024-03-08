@@ -55,7 +55,7 @@
       "panels": [
         {
           "datasource": {
-            "type": "victoriametrics-datasource",
+            "type": "prometheus",
             "uid": "prometheus_on_fly"
           },
           "fieldConfig": {
@@ -140,7 +140,7 @@
           "targets": [
             {
               "datasource": {
-                "type": "victoriametrics-datasource",
+                "type": "prometheus",
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
@@ -160,7 +160,7 @@
         },
         {
           "datasource": {
-            "type": "victoriametrics-datasource",
+            "type": "prometheus",
             "uid": "${source}"
           },
           "fieldConfig": {
@@ -276,7 +276,7 @@
           "targets": [
             {
               "datasource": {
-                "type": "victoriametrics-datasource",
+                "type": "prometheus",
                 "uid": "${source}"
               },
               "editorMode": "code",
@@ -288,7 +288,7 @@
             },
             {
               "datasource": {
-                "type": "victoriametrics-datasource",
+                "type": "prometheus",
                 "uid": "${source}"
               },
               "editorMode": "code",
@@ -300,7 +300,7 @@
             },
             {
               "datasource": {
-                "type": "victoriametrics-datasource",
+                "type": "prometheus",
                 "uid": "${source}"
               },
               "editorMode": "code",
@@ -312,7 +312,7 @@
             },
             {
               "datasource": {
-                "type": "victoriametrics-datasource",
+                "type": "prometheus",
                 "uid": "${source}"
               },
               "editorMode": "code",
@@ -342,7 +342,7 @@
       "panels": [
         {
           "datasource": {
-            "type": "victoriametrics-datasource",
+            "type": "prometheus",
             "uid": "${source}"
           },
           "fieldConfig": {
@@ -472,7 +472,7 @@
       "panels": [
         {
           "datasource": {
-            "type": "victoriametrics-datasource",
+            "type": "prometheus",
             "uid": "${source}"
           },
           "fieldConfig": {
@@ -643,7 +643,7 @@
         },
         {
           "datasource": {
-            "type": "victoriametrics-datasource",
+            "type": "prometheus",
             "uid": "${source}"
           },
           "fieldConfig": {
@@ -764,7 +764,7 @@
           },
           "dataFormat": "tsbuckets",
           "datasource": {
-            "type": "victoriametrics-datasource",
+            "type": "prometheus",
             "uid": "${source}"
           },
           "fieldConfig": {
@@ -869,7 +869,7 @@
     {
       "collapsed": true,
       "datasource": {
-        "type": "victoriametrics-datasource",
+        "type": "prometheus",
         "uid": "prometheus_on_fly"
       },
       "gridPos": {
@@ -891,7 +891,7 @@
           },
           "dataFormat": "tsbuckets",
           "datasource": {
-            "type": "victoriametrics-datasource",
+            "type": "prometheus",
             "uid": "${source}"
           },
           "fieldConfig": {
@@ -991,7 +991,7 @@
         },
         {
           "datasource": {
-            "type": "victoriametrics-datasource",
+            "type": "prometheus",
             "uid": "${source}"
           },
           "fieldConfig": {
@@ -1219,7 +1219,7 @@
         },
         {
           "datasource": {
-            "type": "victoriametrics-datasource",
+            "type": "prometheus",
             "uid": "${source}"
           },
           "fieldConfig": {
@@ -1310,7 +1310,7 @@
         },
         {
           "datasource": {
-            "type": "victoriametrics-datasource",
+            "type": "prometheus",
             "uid": "${source}"
           },
           "description": "Servers have a limit on how many TLS handshakes they will process concurrently per IP block. When this limit is reached, we queue handshakes up to a point. This chart shows how often the limit was reached during an interval.",
@@ -1527,7 +1527,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "victoriametrics-datasource",
+            "type": "prometheus",
             "uid": "prometheus_on_fly"
           },
           "refId": "A"
@@ -1548,7 +1548,7 @@
       "panels": [
         {
           "datasource": {
-            "type": "victoriametrics-datasource",
+            "type": "prometheus",
             "uid": "prometheus_on_fly"
           },
           "fieldConfig": {
@@ -1627,7 +1627,7 @@
           "targets": [
             {
               "datasource": {
-                "type": "victoriametrics-datasource",
+                "type": "prometheus",
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
@@ -1669,7 +1669,7 @@
         "multi": false,
         "name": "source",
         "options": [],
-        "query": "victoriametrics-datasource",
+        "query": "prometheus",
         "queryValue": "",
         "refresh": 1,
         "regex": "",
