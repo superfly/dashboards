@@ -111,7 +111,7 @@
         {
           "targetBlank": true,
           "title": "Explore",
-          "url": "/explore?schemaVersion=1&panes={\"oiA\":{\"datasource\":\"application_logs\",\"queries\":[{\"query\":\"fly.app.name:${app:singlequote} AND fly.app.instance:${instance:singlequote} AND ${query:text}\",\"refId\":\"A\"}]}}"
+          "url": "/explore?schemaVersion=1&panes={\"oiA\":{\"datasource\":\"application_logs\",\"queries\":[{\"query\":\"fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text}\",\"refId\":\"A\"}]}}"
         }
       ],
       "options": {
@@ -149,7 +149,7 @@
               "type": "count"
             }
           ],
-          "query": "fly.app.name:${app:singlequote} AND fly.app.instance:${instance:singlequote} AND ${query:text}",
+          "query": "fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text}",
           "refId": "A",
           "timeField": ""
         }
@@ -199,7 +199,7 @@
               "type": "logs"
             }
           ],
-          "query": "fly.app.name:${app:singlequote} AND fly.app.instance:${instance:singlequote} AND ${query:text}",
+          "query": "fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text}",
           "refId": "A",
           "timeField": ""
         }
@@ -218,8 +218,8 @@
       {
         "current": {
           "selected": true,
-          "text": "*",
-          "value": "*"
+          "text": "",
+          "value": ""
         },
         "hide": 0,
         "label": "Query",
@@ -227,11 +227,11 @@
         "options": [
           {
             "selected": true,
-            "text": "*",
-            "value": "*"
+            "text": "",
+            "value": ""
           }
         ],
-        "query": "*",
+        "query": "",
         "skipUrlSync": false,
         "type": "textbox"
       },
