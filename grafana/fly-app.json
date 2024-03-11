@@ -90,7 +90,7 @@
                 {
                   "id": "1",
                   "settings": {
-                    "limit": "100"
+                    "limit": "1000"
                   },
                   "type": "logs"
                 }
