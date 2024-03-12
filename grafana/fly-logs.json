@@ -292,6 +292,17 @@
         "skipUrlSync": false,
         "sort": 5,
         "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "quickwit-quickwit-datasource",
+          "uid": "application_logs"
+        },
+        "filters": [],
+        "hide": 1,
+        "name": "filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
       }
     ]
   },
