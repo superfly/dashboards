@@ -45,12 +45,190 @@
   "liveNow": false,
   "panels": [
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
         "y": 0
+      },
+      "id": 30,
+      "panels": [
+        {
+          "datasource": {
+            "type": "quickwit-quickwit-datasource",
+            "uid": "application_logs"
+          },
+          "description": "",
+          "gridPos": {
+            "h": 8,
+            "w": 19,
+            "x": 0,
+            "y": 1
+          },
+          "id": 31,
+          "links": [],
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": false
+          },
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "quickwit-quickwit-datasource",
+                "uid": "application_logs"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "limit": "1000"
+                  },
+                  "type": "logs"
+                }
+              ],
+              "query": "fly.app.name:\"$app\"",
+              "refId": "A",
+              "timeField": ""
+            }
+          ],
+          "type": "logs"
+        },
+        {
+          "datasource": {
+            "type": "quickwit-quickwit-datasource",
+            "uid": "application_logs"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMin": 0,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short",
+              "unitScale": true
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 5,
+            "x": 19,
+            "y": 1
+          },
+          "id": 32,
+          "interval": "1m",
+          "maxDataPoints": 200,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "trimEdges": "1"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "quickwit-quickwit-datasource",
+                "uid": "application_logs"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "fly.app.name:\"$app\"",
+              "refId": "A",
+              "timeField": ""
+            }
+          ],
+          "title": "Log volume",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Logs",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
       },
       "id": 23,
       "panels": [],
@@ -150,7 +328,7 @@
         "h": 10,
         "w": 11,
         "x": 0,
-        "y": 1
+        "y": 2
       },
       "id": 17,
       "options": {
@@ -359,7 +537,7 @@
         "h": 10,
         "w": 5,
         "x": 11,
-        "y": 1
+        "y": 2
       },
       "id": 29,
       "options": {
@@ -556,7 +734,7 @@
         "h": 10,
         "w": 8,
         "x": 16,
-        "y": 1
+        "y": 2
       },
       "id": 7,
       "interval": "1m",
@@ -690,7 +868,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 11
+        "y": 12
       },
       "id": 11,
       "options": {
@@ -796,7 +974,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 11
+        "y": 12
       },
       "id": 15,
       "options": {
@@ -892,7 +1070,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 19
+        "y": 20
       },
       "id": 1,
       "options": {
@@ -993,7 +1171,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 19
+        "y": 20
       },
       "id": 9,
       "options": {
@@ -1031,7 +1209,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 28
       },
       "id": 20,
       "panels": [
@@ -1132,7 +1310,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 2
+            "y": 10
           },
           "id": 3,
           "options": {
@@ -1212,7 +1390,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 2
+            "y": 10
           },
           "id": 18,
           "options": {
@@ -1402,7 +1580,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 12
+            "y": 20
           },
           "id": 13,
           "options": {
@@ -1507,7 +1685,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 12
+            "y": 20
           },
           "id": 21,
           "interval": "1m",
@@ -1550,7 +1728,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 29
       },
       "id": 25,
       "panels": [
@@ -1618,7 +1796,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 3
+            "y": 11
           },
           "id": 27,
           "options": {
