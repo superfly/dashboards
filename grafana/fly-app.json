@@ -45,190 +45,12 @@
   "liveNow": false,
   "panels": [
     {
-      "collapsed": true,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 30,
-      "panels": [
-        {
-          "datasource": {
-            "type": "quickwit-quickwit-datasource",
-            "uid": "application_logs"
-          },
-          "description": "",
-          "gridPos": {
-            "h": 8,
-            "w": 19,
-            "x": 0,
-            "y": 1
-          },
-          "id": 31,
-          "links": [],
-          "options": {
-            "dedupStrategy": "none",
-            "enableLogDetails": true,
-            "prettifyLogMessage": false,
-            "showCommonLabels": false,
-            "showLabels": false,
-            "showTime": true,
-            "sortOrder": "Descending",
-            "wrapLogMessage": false
-          },
-          "targets": [
-            {
-              "alias": "",
-              "bucketAggs": [],
-              "datasource": {
-                "type": "quickwit-quickwit-datasource",
-                "uid": "application_logs"
-              },
-              "metrics": [
-                {
-                  "id": "1",
-                  "settings": {
-                    "limit": "1000"
-                  },
-                  "type": "logs"
-                }
-              ],
-              "query": "fly.app.name:\"$app\"",
-              "refId": "A",
-              "timeField": ""
-            }
-          ],
-          "type": "logs"
-        },
-        {
-          "datasource": {
-            "type": "quickwit-quickwit-datasource",
-            "uid": "application_logs"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "axisSoftMin": 0,
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "fieldMinMax": false,
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "short",
-              "unitScale": true
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 5,
-            "x": 19,
-            "y": 1
-          },
-          "id": 32,
-          "interval": "1m",
-          "maxDataPoints": 200,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "alias": "",
-              "bucketAggs": [
-                {
-                  "field": "timestamp",
-                  "id": "2",
-                  "settings": {
-                    "interval": "auto",
-                    "trimEdges": "1"
-                  },
-                  "type": "date_histogram"
-                }
-              ],
-              "datasource": {
-                "type": "quickwit-quickwit-datasource",
-                "uid": "application_logs"
-              },
-              "metrics": [
-                {
-                  "id": "1",
-                  "type": "count"
-                }
-              ],
-              "query": "fly.app.name:\"$app\"",
-              "refId": "A",
-              "timeField": ""
-            }
-          ],
-          "title": "Log volume",
-          "type": "timeseries"
-        }
-      ],
-      "title": "Logs",
-      "type": "row"
-    },
-    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 1
+        "y": 0
       },
       "id": 23,
       "panels": [],
@@ -265,8 +87,7 @@
               }
             ]
           },
-          "unit": "Bps",
-          "unitScale": true
+          "unit": "Bps"
         },
         "overrides": [
           {
@@ -329,7 +150,7 @@
         "h": 10,
         "w": 11,
         "x": 0,
-        "y": 2
+        "y": 1
       },
       "id": 17,
       "options": {
@@ -465,7 +286,7 @@
           "zoom": 1.8
         }
       },
-      "pluginVersion": "10.3.3",
+      "pluginVersion": "10.4.1",
       "targets": [
         {
           "datasource": {
@@ -499,7 +320,6 @@
         }
       ],
       "title": "Data Out",
-      "transformations": [],
       "type": "geomap"
     },
     {
@@ -531,8 +351,7 @@
               }
             ]
           },
-          "unit": "Bps",
-          "unitScale": true
+          "unit": "Bps"
         },
         "overrides": []
       },
@@ -540,7 +359,7 @@
         "h": 10,
         "w": 5,
         "x": 11,
-        "y": 2
+        "y": 1
       },
       "id": 29,
       "options": {
@@ -566,7 +385,7 @@
           }
         ]
       },
-      "pluginVersion": "10.3.3",
+      "pluginVersion": "10.4.1",
       "targets": [
         {
           "datasource": {
@@ -685,8 +504,7 @@
               }
             ]
           },
-          "unit": "Bps",
-          "unitScale": true
+          "unit": "Bps"
         },
         "overrides": [
           {
@@ -738,7 +556,7 @@
         "h": 10,
         "w": 8,
         "x": 16,
-        "y": 2
+        "y": 1
       },
       "id": 7,
       "interval": "1m",
@@ -864,8 +682,7 @@
               }
             ]
           },
-          "unit": "bytes",
-          "unitScale": true
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -873,7 +690,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 12
+        "y": 11
       },
       "id": 11,
       "options": {
@@ -971,8 +788,7 @@
               }
             ]
           },
-          "unit": "percent",
-          "unitScale": true
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -980,7 +796,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 12
+        "y": 11
       },
       "id": 15,
       "options": {
@@ -1009,7 +825,6 @@
         }
       ],
       "title": "CPU Utilization",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -1069,8 +884,7 @@
                 "value": 80
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": []
       },
@@ -1078,7 +892,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 20
+        "y": 19
       },
       "id": 1,
       "options": {
@@ -1171,8 +985,7 @@
               }
             ]
           },
-          "unit": "percentunit",
-          "unitScale": true
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -1180,7 +993,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 20
+        "y": 19
       },
       "id": 9,
       "options": {
@@ -1218,7 +1031,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 27
       },
       "id": 20,
       "panels": [
@@ -1233,6 +1046,7 @@
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
                 "axisLabel": "",
@@ -1247,6 +1061,7 @@
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -1269,7 +1084,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1316,7 +1132,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 10
+            "y": 2
           },
           "id": 3,
           "options": {
@@ -1371,7 +1187,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "#6ED0E0",
@@ -1395,7 +1212,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 10
+            "y": 2
           },
           "id": 18,
           "options": {
@@ -1466,13 +1283,14 @@
               "mode": "none"
             },
             "view": {
+              "allLayers": true,
               "id": "coords",
               "lat": 8,
               "lon": 15,
               "zoom": 1.8
             }
           },
-          "pluginVersion": "9.2.0-75028pre",
+          "pluginVersion": "10.4.1",
           "targets": [
             {
               "datasource": {
@@ -1534,6 +1352,7 @@
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
                 "axisLabel": "",
@@ -1547,6 +1366,7 @@
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -1569,7 +1389,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -1581,7 +1402,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 20
+            "y": 12
           },
           "id": 13,
           "options": {
@@ -1636,6 +1457,7 @@
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
                 "axisLabel": "",
@@ -1649,6 +1471,7 @@
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -1671,7 +1494,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -1683,7 +1507,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 20
+            "y": 12
           },
           "id": 21,
           "interval": "1m",
@@ -1726,7 +1550,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 28
       },
       "id": 25,
       "panels": [
@@ -1741,6 +1565,7 @@
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
                 "axisLabel": "",
@@ -1754,6 +1579,7 @@
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -1775,7 +1601,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1791,7 +1618,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 11
+            "y": 3
           },
           "id": 27,
           "options": {
