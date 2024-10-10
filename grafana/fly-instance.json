@@ -652,6 +652,7 @@
                 }
               },
               "mappings": [],
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -839,7 +840,8 @@
                 },
                 "thresholdsStyle": {
                   "mode": "off"
-                }
+                },
+                "axisSoftMin": 0
               },
               "mappings": [],
               "thresholds": {
@@ -4117,6 +4119,7 @@
                 }
               },
               "mappings": [],
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -4159,7 +4162,7 @@
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
-              "expr": "fly_instance_filesystem_blocks{app=\"$app\", instance=\"$instance\", mount!=\"/\"} * fly_instance_filesystem_block_size{app=\"$app\", instance=\"$instance\", mount!=\"/\"}",
+              "expr": "fly_instance_filesystem_blocks{app=\"$app\", instance=\"$instance\", mount!=\"/\",mount!=\"/.fly-upper-layer\"} * fly_instance_filesystem_block_size{app=\"$app\", instance=\"$instance\", mount!=\"/\",mount!=\"/.fly-upper-layer\"}",
               "legendFormat": "{{mount}} ({{instance}} - {{region}}) Total",
               "range": true,
               "refId": "A"
@@ -4170,7 +4173,7 @@
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
-              "expr": "fly_instance_filesystem_blocks{app=\"$app\", instance=\"$instance\", mount!=\"/\"} * fly_instance_filesystem_block_size{app=\"$app\", instance=\"$instance\", mount!=\"/\"} - fly_instance_filesystem_blocks_avail{app=\"$app\", instance=\"$instance\", mount!=\"/\"} * fly_instance_filesystem_block_size{app=\"$app\", instance=\"$instance\", mount!=\"/\"}",
+              "expr": "fly_instance_filesystem_blocks{app=\"$app\", instance=\"$instance\", mount!=\"/\",mount!=\"/.fly-upper-layer\"} * fly_instance_filesystem_block_size{app=\"$app\", instance=\"$instance\", mount!=\"/\",mount!=\"/.fly-upper-layer\"} - fly_instance_filesystem_blocks_avail{app=\"$app\", instance=\"$instance\", mount!=\"/\",mount!=\"/.fly-upper-layer\"} * fly_instance_filesystem_block_size{app=\"$app\", instance=\"$instance\", mount!=\"/\",mount!=\"/.fly-upper-layer\"}",
               "hide": false,
               "legendFormat": "{{mount}} ({{instance}} - {{region}}) Used",
               "range": true,
