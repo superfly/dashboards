@@ -151,8 +151,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -464,7 +463,7 @@
           "zoom": 1.8
         }
       },
-      "pluginVersion": "10.4.1",
+      "pluginVersion": "11.2.2",
       "targets": [
         {
           "datasource": {
@@ -563,7 +562,7 @@
           }
         ]
       },
-      "pluginVersion": "10.4.1",
+      "pluginVersion": "11.2.2",
       "targets": [
         {
           "datasource": {
@@ -647,6 +646,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "none",
@@ -820,6 +820,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -862,7 +863,38 @@
           },
           "unit": "bytes"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    0,
+                    10
+                  ],
+                  "fill": "dot"
+                }
+              },
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": true,
+                  "tooltip": false,
+                  "viz": false
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -873,10 +905,15 @@
       "id": 11,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "lastNotNull",
+            "mean"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -929,6 +966,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -1135,6 +1173,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -1235,6 +1274,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 1,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -1375,8 +1415,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1478,8 +1517,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "#6ED0E0",
@@ -1680,8 +1718,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -1785,8 +1822,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -1862,8 +1898,9 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
-                "fillOpacity": 10,
+                "fillOpacity": 5,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
@@ -1888,6 +1925,7 @@
                 }
               },
               "mappings": [],
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1903,21 +1941,56 @@
               },
               "unit": "bytes"
             },
-            "overrides": []
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "A"
+                },
+                "properties": [
+                  {
+                    "id": "custom.fillOpacity",
+                    "value": 0
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        0,
+                        10
+                      ],
+                      "fill": "dot"
+                    }
+                  },
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": true,
+                      "tooltip": false,
+                      "viz": false
+                    }
+                  }
+                ]
+              }
+            ]
           },
           "gridPos": {
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 11
+            "y": 30
           },
           "id": 27,
           "options": {
             "legend": {
-              "calcs": [],
-              "displayMode": "list",
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
               "placement": "bottom",
-              "showLegend": true
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": true
             },
             "tooltip": {
               "mode": "multi",
@@ -1931,8 +2004,8 @@
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
-              "expr": "fly_instance_filesystem_blocks{app=~\"^$app$\", mount!=\"/\"} * fly_instance_filesystem_block_size{app=~\"^$app$\", mount!=\"/\"}",
-              "legendFormat": "{{mount}} ({{instance}} - {{region}}) Total",
+              "expr": "mode(fly_instance_filesystem_blocks{app=~\"^$app$\", mount!=\"/\",mount!=\"/.fly-upper-layer\"} * fly_instance_filesystem_block_size{app=~\"^$app$\", mount!=\"/\",mount!=\"/.fly-upper-layer\"})",
+              "legendFormat": "{{mount}} Total",
               "range": true,
               "refId": "A"
             },
@@ -1942,7 +2015,7 @@
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
-              "expr": "fly_instance_filesystem_blocks{app=~\"^$app$\", mount!=\"/\"} * fly_instance_filesystem_block_size{app=~\"^$app$\", mount!=\"/\"} - fly_instance_filesystem_blocks_avail{app=~\"^$app$\",mount!=\"/\"} * fly_instance_filesystem_block_size{app=~\"^$app$\",mount!=\"/\"}",
+              "expr": "fly_instance_filesystem_blocks{app=~\"^$app$\", mount!=\"/\",mount!=\"/.fly-upper-layer\"} * fly_instance_filesystem_block_size{app=~\"^$app$\", mount!=\"/\",mount!=\"/.fly-upper-layer\"} - fly_instance_filesystem_blocks_avail{app=~\"^$app$\",mount!=\"/\",mount!=\"/.fly-upper-layer\"} * fly_instance_filesystem_block_size{app=~\"^$app$\",mount!=\"/\",mount!=\"/.fly-upper-layer\"}",
               "hide": false,
               "legendFormat": "{{mount}} ({{instance}} - {{region}}) Used",
               "range": true,
