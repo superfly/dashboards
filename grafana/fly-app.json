@@ -916,7 +916,7 @@
         "type": "prometheus",
         "uid": "prometheus_on_fly"
       },
-      "description": "Top 10 instances",
+      "description": "Per-instance aggregate across all CPUs.\n* `baseline`: baseline CPU performance for your Machine type. Your instance can burst above this threshold, but only for short periods.\n* `throttled`: Percentage of time your instance was throttled to its baseline performance.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -930,7 +930,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
+            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -954,8 +954,8 @@
               "mode": "off"
             }
           },
+          "fieldMinMax": false,
           "mappings": [],
-          "max": 100,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -968,7 +968,95 @@
           },
           "unit": "percent"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    0,
+                    10
+                  ],
+                  "fill": "dot"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "baseline"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "throttled"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    0,
+                    50
+                  ],
+                  "fill": "dot"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed",
+                  "seriesBy": "max"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 15
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.showPoints",
+                "value": "never"
+              },
+              {
+                "id": "custom.pointSize",
+                "value": 1
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -996,10 +1084,35 @@
             "uid": "prometheus_on_fly"
           },
           "editorMode": "code",
-          "expr": "sum(increase(fly_instance_cpu{app=\"$app\", mode!=\"idle\"}[60s]))by(instance, region)/60 / \n  sum(count(fly_instance_cpu{app=\"$app\", mode=\"idle\"})without(cpu))by(instance, region)",
+          "expr": "sum(increase(fly_instance_cpu{app=\"$app\", mode!=\"idle\",mode!=\"steal\"}[60s]))by(instance, region)/60 / \n  sum(count(fly_instance_cpu{app=\"$app\", mode=\"idle\"})without(cpu))by(instance, region)",
+          "hide": false,
           "legendFormat": "{{instance}} - {{region}}",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_on_fly"
+          },
+          "editorMode": "code",
+          "expr": "mode(fly_instance_cpu_baseline{app=\"$app\"}) /\nmode(count(fly_instance_cpu{app=\"$app\", mode=\"idle\"})without(cpu_id, mode)) * 100",
+          "hide": false,
+          "legendFormat": "baseline",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_on_fly"
+          },
+          "editorMode": "code",
+          "expr": "avg(rate(fly_instance_cpu_throttle{app=\"$app\"}[60s])/\ncount(fly_instance_cpu{app=\"$app\", mode=\"idle\"})without(cpu_id, mode))>1",
+          "hide": false,
+          "legendFormat": "throttled",
+          "range": true,
+          "refId": "C"
         }
       ],
       "title": "CPU Utilization",
