@@ -460,6 +460,104 @@
           ],
           "title": "Connects / disconnects",
           "type": "timeseries"
+        },
+        {
+          "type": "timeseries",
+          "title": "Rate limits",
+          "gridPos": {
+            "x": 12,
+            "y": 2,
+            "w": 12,
+            "h": 8
+          },
+          "datasource": {
+            "name": "${source}",
+            "uid": "${source}",
+            "type": "prometheus"
+          },
+          "id": 33,
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "sum(increase(fly_edge_tcp_rate_limited_count{app=~\"$app\",region=~\"$region\",host=~\"$host\"})) by (type, region) > 0",
+              "range": true,
+              "instant": false,
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${source}"
+              },
+              "editorMode": "code",
+              "legendFormat": "{{type}} - {{region}}"
+            }
+          ],
+          "options": {
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            },
+            "legend": {
+              "showLegend": true,
+              "displayMode": "list",
+              "placement": "bottom",
+              "calcs": []
+            }
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "drawStyle": "bars",
+                "lineInterpolation": "linear",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "lineWidth": 1,
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "spanNulls": false,
+                "insertNulls": false,
+                "showPoints": "auto",
+                "pointSize": 5,
+                "stacking": {
+                  "mode": "none",
+                  "group": "A"
+                },
+                "axisPlacement": "auto",
+                "axisLabel": "",
+                "axisColorMode": "text",
+                "axisBorderShow": false,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "axisCenteredZero": false,
+                "hideFrom": {
+                  "tooltip": false,
+                  "viz": false,
+                  "legend": false
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "value": null,
+                    "color": "green"
+                  },
+                  {
+                    "value": 80,
+                    "color": "red"
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "description": "Servers have a limit on how many TCP connections they will accept and how many TLS handshakes they will process each second. When these limits are reached, incoming connections are dropped. This chart shows how many connections have been dropped per rate limit type."
         }
       ],
       "title": "TCP",
