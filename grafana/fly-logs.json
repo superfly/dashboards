@@ -39,10 +39,9 @@
   "panels": [
     {
       "datasource": {
-        "type": "quickwit-quickwit-datasource",
         "uid": "application_logs"
       },
-      "description": "[Query Language](https://quickwit.io/docs/reference/query-language)",
+      "description": "[Query Language](https://docs.victoriametrics.com/victorialogs/logsql/)",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -56,7 +55,7 @@
             "axisPlacement": "auto",
             "axisSoftMin": 0,
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -106,12 +105,11 @@
         "y": 0
       },
       "id": 2,
-      "interval": "1m",
       "links": [
         {
           "targetBlank": true,
           "title": "Explore",
-          "url": "/explore?schemaVersion=1&panes={\"oiA\":{\"datasource\":\"application_logs\",\"queries\":[{\"query\":\"fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text}\",\"refId\":\"A\"}]}}"
+          "url": "/explore?schemaVersion=1&panes={\"oiA\":{\"datasource\":\"application_logs\",\"queries\":[{\"expr\":\"fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text}\",\"refId\":\"A\"}]}}"
         }
       ],
       "options": {
@@ -140,9 +138,10 @@
             }
           ],
           "datasource": {
-            "type": "quickwit-quickwit-datasource",
             "uid": "application_logs"
           },
+          "editorMode": "code",
+          "expr": "fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text} | stats count()",
           "metrics": [
             {
               "id": "1",
@@ -150,19 +149,23 @@
             }
           ],
           "query": "fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text}",
+          "queryType": "statsRange",
           "refId": "A",
           "timeField": ""
         }
       ],
-      "title": "Logs volume",
+      "title": "",
       "type": "timeseries"
     },
     {
       "datasource": {
-        "type": "quickwit-quickwit-datasource",
         "uid": "application_logs"
       },
       "description": "",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "gridPos": {
         "h": 17,
         "w": 24,
@@ -172,6 +175,7 @@
       "id": 1,
       "options": {
         "dedupStrategy": "none",
+        "enableInfiniteScrolling": false,
         "enableLogDetails": true,
         "prettifyLogMessage": true,
         "showCommonLabels": false,
@@ -185,9 +189,10 @@
           "alias": "",
           "bucketAggs": [],
           "datasource": {
-            "type": "quickwit-quickwit-datasource",
             "uid": "application_logs"
           },
+          "editorMode": "code",
+          "expr": "fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text}",
           "hide": false,
           "metrics": [
             {
@@ -200,16 +205,18 @@
             }
           ],
           "query": "fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text}",
+          "queryType": "instant",
           "refId": "A",
           "timeField": ""
         }
       ],
-      "title": "Logs",
+      "title": "",
       "type": "logs"
     }
   ],
+  "preload": true,
   "refresh": "",
-  "schemaVersion": 39,
+  "schemaVersion": 41,
   "tags": [
     "fly"
   ],
@@ -217,11 +224,9 @@
     "list": [
       {
         "current": {
-          "selected": true,
           "text": "",
           "value": ""
         },
-        "hide": 0,
         "label": "Query",
         "name": "query",
         "options": [
@@ -232,25 +237,21 @@
           }
         ],
         "query": "",
-        "skipUrlSync": false,
         "type": "textbox"
       },
       {
         "allValue": "*",
         "current": {
-          "selected": false,
-          "text": "wjordan-vmagent",
-          "value": "wjordan-vmagent"
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "prometheus_on_fly"
         },
         "definition": "label_values(fly_instance_up,app)",
-        "hide": 0,
         "includeAll": true,
         "label": "App",
-        "multi": false,
         "name": "app",
         "options": [],
         "query": {
@@ -260,14 +261,12 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
         "sort": 5,
         "type": "query"
       },
       {
         "allValue": "*",
         "current": {
-          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -276,10 +275,8 @@
           "uid": "prometheus_on_fly"
         },
         "definition": "label_values(fly_instance_up{app=\"$app\"},instance)",
-        "hide": 0,
         "includeAll": true,
         "label": "Instance",
-        "multi": false,
         "name": "instance",
         "options": [],
         "query": {
@@ -289,19 +286,17 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
         "sort": 5,
         "type": "query"
       },
       {
+        "baseFilters": [],
         "datasource": {
-          "type": "quickwit-quickwit-datasource",
           "uid": "application_logs"
         },
         "filters": [],
         "hide": 1,
         "name": "filter",
-        "skipUrlSync": false,
         "type": "adhoc"
       }
     ]
@@ -314,6 +309,5 @@
   "timezone": "",
   "title": "Fly Logs",
   "uid": "fly-logs",
-  "version": 1,
-  "weekStart": ""
+  "version": 1
 }

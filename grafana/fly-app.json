@@ -56,10 +56,13 @@
       "panels": [
         {
           "datasource": {
-            "type": "quickwit-quickwit-datasource",
             "uid": "application_logs"
           },
           "description": "",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
           "gridPos": {
             "h": 8,
             "w": 19,
@@ -67,9 +70,9 @@
             "y": 1
           },
           "id": 31,
-          "links": [],
           "options": {
             "dedupStrategy": "none",
+            "enableInfiniteScrolling": false,
             "enableLogDetails": true,
             "prettifyLogMessage": false,
             "showCommonLabels": false,
@@ -83,9 +86,10 @@
               "alias": "",
               "bucketAggs": [],
               "datasource": {
-                "type": "quickwit-quickwit-datasource",
                 "uid": "application_logs"
               },
+              "editorMode": "code",
+              "expr": "fly.app.name:\"$app\"",
               "metrics": [
                 {
                   "id": "1",
@@ -96,15 +100,16 @@
                 }
               ],
               "query": "fly.app.name:\"$app\"",
+              "queryType": "instant",
               "refId": "A",
               "timeField": ""
             }
           ],
+          "title": "",
           "type": "logs"
         },
         {
           "datasource": {
-            "type": "quickwit-quickwit-datasource",
             "uid": "application_logs"
           },
           "fieldConfig": {
@@ -159,8 +164,7 @@
                   }
                 ]
               },
-              "unit": "short",
-              "unitScale": true
+              "unit": "short"
             },
             "overrides": []
           },
@@ -181,6 +185,7 @@
               "showLegend": true
             },
             "tooltip": {
+              "hideZeros": false,
               "mode": "single",
               "sort": "none"
             }
@@ -200,9 +205,10 @@
                 }
               ],
               "datasource": {
-                "type": "quickwit-quickwit-datasource",
                 "uid": "application_logs"
               },
+              "editorMode": "code",
+              "expr": "fly.app.name:\"$app\" | stats count()",
               "metrics": [
                 {
                   "id": "1",
@@ -210,6 +216,7 @@
                 }
               ],
               "query": "fly.app.name:\"$app\"",
+              "queryType": "statsRange",
               "refId": "A",
               "timeField": ""
             }
@@ -259,8 +266,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -463,7 +469,7 @@
           "zoom": 1.8
         }
       },
-      "pluginVersion": "11.2.2",
+      "pluginVersion": "11.6.0-pre",
       "targets": [
         {
           "datasource": {
@@ -523,8 +529,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -562,7 +567,7 @@
           }
         ]
       },
-      "pluginVersion": "11.2.2",
+      "pluginVersion": "11.6.0-pre",
       "targets": [
         {
           "datasource": {
@@ -677,8 +682,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -746,10 +750,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.6.0-pre",
       "targets": [
         {
           "datasource": {
@@ -858,8 +864,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -922,10 +927,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "desc"
         }
       },
+      "pluginVersion": "11.6.0-pre",
       "targets": [
         {
           "datasource": {
@@ -1012,8 +1019,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1148,10 +1154,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "desc"
         }
       },
+      "pluginVersion": "11.6.0-pre",
       "targets": [
         {
           "datasource": {
@@ -1243,8 +1251,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1270,10 +1277,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.6.0-pre",
       "targets": [
         {
           "datasource": {
@@ -1344,8 +1353,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1372,10 +1380,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.6.0-pre",
       "targets": [
         {
           "datasource": {
@@ -1500,7 +1510,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 29
+            "y": 37
           },
           "id": 3,
           "options": {
@@ -1579,7 +1589,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 29
+            "y": 37
           },
           "id": 18,
           "options": {
@@ -1769,7 +1779,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 39
+            "y": 47
           },
           "id": 13,
           "options": {
@@ -1874,7 +1884,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 39
+            "y": 47
           },
           "id": 21,
           "interval": "1m",
@@ -2017,7 +2027,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 30
+            "y": 38
           },
           "id": 27,
           "options": {
@@ -2069,8 +2079,9 @@
       "type": "row"
     }
   ],
+  "preload": true,
   "refresh": "",
-  "schemaVersion": 39,
+  "schemaVersion": 41,
   "tags": [
     "fly"
   ],
@@ -2085,10 +2096,8 @@
           "uid": "prometheus_on_fly"
         },
         "definition": "label_values(fly_instance_up, app)",
-        "hide": 0,
         "includeAll": false,
         "label": "App",
-        "multi": false,
         "name": "app",
         "options": [],
         "query": {
@@ -2097,7 +2106,6 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
         "sort": 5,
         "type": "query"
       }
@@ -2121,6 +2129,5 @@
   "timezone": "",
   "title": "Fly App",
   "uid": "fly-app",
-  "version": 1,
-  "weekStart": ""
+  "version": 1
 }
