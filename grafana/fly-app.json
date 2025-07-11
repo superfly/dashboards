@@ -2019,6 +2019,150 @@
             "x": 0,
             "y": 30
           },
+          "id": 33,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus_on_fly"
+              },
+              "editorMode": "code",
+              "expr": "label_replace(mode(fly_instance_filesystem_blocks{app=~\"^$app$\",mount=\"/.fly-upper-layer\"} * fly_instance_filesystem_block_size{app=~\"^$app$\",mount=\"/.fly-upper-layer\"}) by (mount),\"mount\", \"/\", \"mount\", \"/.fly-upper-layer\")",
+              "hide": false,
+              "legendFormat": "{{mount}} Total",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus_on_fly"
+              },
+              "editorMode": "code",
+              "expr": "label_replace(fly_instance_filesystem_blocks{app=~\"^$app$\", mount=\"/.fly-upper-layer\"} * fly_instance_filesystem_block_size{app=~\"^$app$\", mount=\"/.fly-upper-layer\"} - fly_instance_filesystem_blocks_avail{app=~\"^$app$\",mount=\"/.fly-upper-layer\"} * fly_instance_filesystem_block_size{app=~\"^$app$\",mount=\"/.fly-upper-layer\"},\"mount\", \"/\", \"mount\", \"/.fly-upper-layer\")",
+              "hide": false,
+              "legendFormat": "{{mount}} ({{instance}} - {{region}}) Used",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Root Filesystem Usage",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_on_fly"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 5,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "A"
+                },
+                "properties": [
+                  {
+                    "id": "custom.fillOpacity",
+                    "value": 0
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        0,
+                        10
+                      ],
+                      "fill": "dot"
+                    }
+                  },
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": true,
+                      "tooltip": false,
+                      "viz": false
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 30
+          },
           "id": 27,
           "options": {
             "legend": {
@@ -2061,7 +2205,7 @@
               "refId": "B"
             }
           ],
-          "title": "Volume Usage",
+          "title": "Fly Volume Usage",
           "type": "timeseries"
         }
       ],
@@ -2121,6 +2265,6 @@
   "timezone": "",
   "title": "Fly App",
   "uid": "fly-app",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
