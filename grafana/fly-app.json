@@ -18,6 +18,25 @@
           "type": "dashboard"
         },
         "type": "dashboard"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus_on_fly"
+        },
+        "enable": true,
+        "expr": "count by (instance) (fly_instance_exit_oom{app=\"$app\"}[$__interval]==1)",
+        "filter": {
+          "exclude": false,
+          "ids": [
+            11
+          ]
+        },
+        "iconColor": "red",
+        "name": "Instance OOMs",
+        "step": "5s",
+        "textFormat": "{{instance}}",
+        "titleFormat": "Instance OOM:"
       }
     ]
   },
