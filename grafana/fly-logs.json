@@ -19,6 +19,7 @@
   "editable": false,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
+  "id": 150719,
   "links": [
     {
       "asDropdown": false,
@@ -39,10 +40,10 @@
   "panels": [
     {
       "datasource": {
-        "type": "quickwit-quickwit-datasource",
-        "uid": "application_logs"
+        "type": "victoriametrics-logs-datasource",
+        "uid": "application_logs_vlog"
       },
-      "description": "[Query Language](https://quickwit.io/docs/reference/query-language)",
+      "description": "[Query Language](https://docs.victoriametrics.com/victorialogs/logsql/)",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -54,28 +55,16 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMin": 0,
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 80,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -94,82 +83,73 @@
                 "value": 80
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 7,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 2,
+      "id": 1,
       "interval": "1m",
       "links": [
         {
           "targetBlank": true,
           "title": "Explore",
-          "url": "/explore?schemaVersion=1&panes={\"oiA\":{\"datasource\":\"application_logs\",\"queries\":[{\"query\":\"fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text}\",\"refId\":\"A\"}]}}"
+          "url": "/explore?schemaVersion=1&panes={\"oiA\":{\"datasource\":\"application_logs_vlog\",\"queries\":[{\"query\":\"fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text}\",\"refId\":\"A\"}]}}"
         }
       ],
       "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "normal",
         "tooltip": {
           "mode": "single",
           "sort": "none"
-        }
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 100
       },
       "targets": [
         {
-          "alias": "",
-          "bucketAggs": [
-            {
-              "field": "timestamp",
-              "id": "2",
-              "settings": {
-                "interval": "auto"
-              },
-              "type": "date_histogram"
-            }
-          ],
           "datasource": {
-            "type": "quickwit-quickwit-datasource",
-            "uid": "application_logs"
+            "type": "victoriametrics-logs-datasource",
+            "uid": "application_logs_vlog"
           },
-          "metrics": [
-            {
-              "id": "1",
-              "type": "count"
-            }
-          ],
-          "query": "fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text}",
-          "refId": "A",
-          "timeField": ""
+          "editorMode": "code",
+          "expr": "fly.app.name: $app fly.app.instance: $instance _msg:$query|stats by (fly.app.name) count() as logs",
+          "queryType": "statsRange",
+          "refId": "A"
         }
       ],
-      "title": "Logs volume",
-      "type": "timeseries"
+      "title": "Log Count",
+      "type": "barchart"
     },
     {
       "datasource": {
-        "type": "quickwit-quickwit-datasource",
-        "uid": "application_logs"
+        "type": "victoriametrics-logs-datasource",
+        "uid": "application_logs_vlog"
       },
-      "description": "",
       "gridPos": {
         "h": 17,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 7
       },
-      "id": 1,
+      "id": 2,
       "options": {
         "dedupStrategy": "none",
         "enableLogDetails": true,
@@ -182,33 +162,19 @@
       },
       "targets": [
         {
-          "alias": "",
-          "bucketAggs": [],
           "datasource": {
-            "type": "quickwit-quickwit-datasource",
-            "uid": "application_logs"
+            "type": "victoriametrics-logs-datasource",
+            "uid": "application_logs_vlog"
           },
-          "hide": false,
-          "metrics": [
-            {
-              "id": "1",
-              "settings": {
-                "limit": "1000",
-                "sortDirection": "desc"
-              },
-              "type": "logs"
-            }
-          ],
-          "query": "fly.app.name:${app:singlequote} fly.app.instance:${instance:singlequote} ${query:text}",
-          "refId": "A",
-          "timeField": ""
+          "expr": "fly.app.name:$app fly.app.instance:$instance _msg:$query",
+          "queryType": "instant",
+          "refId": "A"
         }
       ],
       "title": "Logs",
       "type": "logs"
     }
   ],
-  "refresh": "",
   "schemaVersion": 39,
   "tags": [
     "fly"
@@ -217,34 +183,30 @@
     "list": [
       {
         "current": {
-          "selected": true,
-          "text": "",
-          "value": ""
+          "selected": false,
+          "text": "*",
+          "value": "*"
         },
         "hide": 0,
-        "label": "Query",
+        "label": "Query ('*' for all logs)",
         "name": "query",
         "options": [
           {
             "selected": true,
-            "text": "",
-            "value": ""
+            "text": "*",
+            "value": "*"
           }
         ],
-        "query": "",
+        "query": "*",
         "skipUrlSync": false,
         "type": "textbox"
       },
       {
         "allValue": "*",
         "current": {
-          "selected": false,
-          "text": "wjordan-vmagent",
-          "value": "wjordan-vmagent"
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "prometheus_on_fly"
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
         },
         "definition": "label_values(fly_instance_up,app)",
         "hide": 0,
@@ -254,14 +216,14 @@
         "name": "app",
         "options": [],
         "query": {
-          "qryType": 1,
+          "qryType": 5,
           "query": "label_values(fly_instance_up,app)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 5,
+        "sort": 1,
         "type": "query"
       },
       {
@@ -271,10 +233,6 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "prometheus_on_fly"
-        },
         "definition": "label_values(fly_instance_up{app=\"$app\"},instance)",
         "hide": 0,
         "includeAll": true,
@@ -283,23 +241,24 @@
         "name": "instance",
         "options": [],
         "query": {
-          "qryType": 1,
+          "qryType": 5,
           "query": "label_values(fly_instance_up{app=\"$app\"},instance)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 5,
+        "sort": 1,
         "type": "query"
       },
       {
         "datasource": {
-          "type": "quickwit-quickwit-datasource",
-          "uid": "application_logs"
+          "type": "victoriametrics-logs-datasource",
+          "uid": "application_logs_vlog"
         },
         "filters": [],
-        "hide": 1,
+        "hide": 0,
+        "label": "Filters",
         "name": "filter",
         "skipUrlSync": false,
         "type": "adhoc"
@@ -314,6 +273,6 @@
   "timezone": "",
   "title": "Fly Logs",
   "uid": "fly-logs",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }

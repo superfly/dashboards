@@ -41,10 +41,10 @@
     ]
   },
   "description": "General Fly App metrics.",
-  "editable": false,
+  "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 25,
+  "id": 150721,
   "links": [
     {
       "asDropdown": false,
@@ -75,8 +75,9 @@
       "panels": [
         {
           "datasource": {
-            "type": "quickwit-quickwit-datasource",
-            "uid": "application_logs"
+            "default": false,
+            "type": "victoriametrics-logs-datasource",
+            "uid": "application_logs_vlog"
           },
           "description": "",
           "gridPos": {
@@ -86,7 +87,6 @@
             "y": 1
           },
           "id": 31,
-          "links": [],
           "options": {
             "dedupStrategy": "none",
             "enableLogDetails": true,
@@ -102,9 +102,12 @@
               "alias": "",
               "bucketAggs": [],
               "datasource": {
-                "type": "quickwit-quickwit-datasource",
-                "uid": "application_logs"
+                "default": false,
+                "type": "victoriametrics-logs-datasource",
+                "uid": "application_logs_vlog"
               },
+              "editorMode": "code",
+              "expr": "fly.app.name: $app",
               "metrics": [
                 {
                   "id": "1",
@@ -115,6 +118,7 @@
                 }
               ],
               "query": "fly.app.name:\"$app\"",
+              "queryType": "instant",
               "refId": "A",
               "timeField": ""
             }
@@ -123,8 +127,9 @@
         },
         {
           "datasource": {
-            "type": "quickwit-quickwit-datasource",
-            "uid": "application_logs"
+            "default": false,
+            "type": "victoriametrics-logs-datasource",
+            "uid": "application_logs_vlog"
           },
           "fieldConfig": {
             "defaults": {
@@ -139,6 +144,7 @@
                 "axisPlacement": "auto",
                 "axisSoftMin": 0,
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 0,
                 "gradientMode": "none",
@@ -170,7 +176,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -178,8 +185,7 @@
                   }
                 ]
               },
-              "unit": "short",
-              "unitScale": true
+              "unit": "short"
             },
             "overrides": []
           },
@@ -219,9 +225,12 @@
                 }
               ],
               "datasource": {
-                "type": "quickwit-quickwit-datasource",
-                "uid": "application_logs"
+                "default": false,
+                "type": "victoriametrics-logs-datasource",
+                "uid": "application_logs_vlog"
               },
+              "editorMode": "code",
+              "expr": "fly.app.name: $app | stats count() as logs",
               "metrics": [
                 {
                   "id": "1",
@@ -229,6 +238,7 @@
                 }
               ],
               "query": "fly.app.name:\"$app\"",
+              "queryType": "statsRange",
               "refId": "A",
               "timeField": ""
             }
@@ -2241,7 +2251,9 @@
     "list": [
       {
         "current": {
-          "selected": false
+          "selected": false,
+          "text": "findmysteve",
+          "value": "findmysteve"
         },
         "datasource": {
           "type": "prometheus",
@@ -2284,6 +2296,6 @@
   "timezone": "",
   "title": "Fly App",
   "uid": "fly-app",
-  "version": 2,
+  "version": 5,
   "weekStart": ""
 }
