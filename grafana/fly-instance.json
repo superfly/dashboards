@@ -2232,11 +2232,13 @@
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 0,
                 "gradientMode": "none",
@@ -2245,6 +2247,7 @@
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -2266,7 +2269,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -2291,7 +2295,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 60
+            "y": 4
           },
           "id": 15,
           "options": {
@@ -2336,29 +2340,38 @@
         },
         {
           "datasource": {
+            "default": true,
             "type": "prometheus",
             "uid": "prometheus_on_fly"
           },
+          "description": "Fly Volumes Overview: https://fly.io/docs/volumes/overview/",
           "fieldConfig": {
             "defaults": {
               "color": {
+                "fixedColor": "#fb001d",
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
-                "fillOpacity": 0,
+                "fillOpacity": 25,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
                 "lineWidth": 1,
                 "pointSize": 5,
                 "scaleDistribution": {
@@ -2379,32 +2392,20 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
-              "unit": "Bps"
+              "unit": "eps"
             },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byRegexp",
-                  "options": ".*Written.*"
-                },
-                "properties": [
-                  {
-                    "id": "custom.transform",
-                    "value": "negative-Y"
-                  }
-                ]
-              }
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 60
+            "y": 4
           },
           "id": 16,
           "options": {
@@ -2426,8 +2427,23 @@
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
-              "expr": "rate(fly_instance_disk_sectors_read{instance=\"$instance\"}) * 512",
-              "legendFormat": "{{device}} - Read",
+              "expr": "sum by (block_name) (fly_instance_block_rate_limiter_throttled_events{instance=\"$instance\", block_name=\"rootfs\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "vda ( {{block_name}} )",
+              "range": true,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus_on_fly"
+              },
+              "editorMode": "code",
+              "expr": "sum by (block_name) (fly_instance_block_rate_limiter_throttled_events{instance=\"$instance\", block_name=\"rootfs_overlay\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "vdb ( {{block_name}} )",
               "range": true,
               "refId": "A"
             },
@@ -2437,14 +2453,15 @@
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
-              "expr": "rate(fly_instance_disk_sectors_written{instance=\"$instance\"}) * 512",
+              "expr": "sum by (block_name) (fly_instance_block_rate_limiter_throttled_events{instance=\"$instance\", block_name!~\"rootfs|rootfs_overlay\"})",
               "hide": false,
-              "legendFormat": "{{device}} - Written",
+              "instant": false,
+              "legendFormat": "vdc ( {{block_name}} )",
               "range": true,
               "refId": "B"
             }
           ],
-          "title": "Disk R/W Data",
+          "title": "Disk Throttled Events",
           "type": "timeseries"
         },
         {
@@ -2459,11 +2476,13 @@
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 0,
                 "gradientMode": "none",
@@ -2472,6 +2491,7 @@
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -2493,7 +2513,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -2518,7 +2539,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 68
+            "y": 12
           },
           "id": 17,
           "options": {
@@ -2566,18 +2587,19 @@
             "type": "prometheus",
             "uid": "prometheus_on_fly"
           },
-          "description": "Proportion of each second spent doing I/Os.",
           "fieldConfig": {
             "defaults": {
               "color": {
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 0,
                 "gradientMode": "none",
@@ -2586,6 +2608,7 @@
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -2607,25 +2630,35 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
-              "unit": "percentunit"
+              "unit": "Bps"
             },
-            "overrides": []
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": ".*Written.*"
+                },
+                "properties": [
+                  {
+                    "id": "custom.transform",
+                    "value": "negative-Y"
+                  }
+                ]
+              }
+            ]
           },
           "gridPos": {
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 68
+            "y": 12
           },
-          "id": 33,
+          "id": 74,
           "options": {
             "legend": {
               "calcs": [],
@@ -2645,13 +2678,25 @@
                 "uid": "prometheus_on_fly"
               },
               "editorMode": "code",
-              "expr": "rate(fly_instance_disk_time_io{instance=\"$instance\"}) / 1000",
-              "legendFormat": "{{device}}",
+              "expr": "rate(fly_instance_disk_sectors_read{instance=\"$instance\"}) * 512",
+              "legendFormat": "{{device}} - Read",
               "range": true,
               "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus_on_fly"
+              },
+              "editorMode": "code",
+              "expr": "rate(fly_instance_disk_sectors_written{instance=\"$instance\"}) * 512",
+              "hide": false,
+              "legendFormat": "{{device}} - Written",
+              "range": true,
+              "refId": "B"
             }
           ],
-          "title": "I/O Utilization",
+          "title": "Disk R/W Data",
           "type": "timeseries"
         },
         {
@@ -2666,11 +2711,13 @@
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 0,
                 "gradientMode": "none",
@@ -2679,6 +2726,7 @@
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -2700,7 +2748,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2716,7 +2765,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 76
+            "y": 20
           },
           "id": 37,
           "options": {
@@ -2752,18 +2801,20 @@
             "type": "prometheus",
             "uid": "prometheus_on_fly"
           },
-          "description": "Total number of seconds spent by all reads/writes divided by the total number of reads/writes completed successfully.",
+          "description": "Proportion of each second spent doing I/Os.",
           "fieldConfig": {
             "defaults": {
               "color": {
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 0,
                 "gradientMode": "none",
@@ -2772,6 +2823,7 @@
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -2793,7 +2845,105 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 20
+          },
+          "id": 33,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus_on_fly"
+              },
+              "editorMode": "code",
+              "expr": "rate(fly_instance_disk_time_io{instance=\"$instance\"}) / 1000",
+              "legendFormat": "{{device}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "I/O Utilization",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_on_fly"
+          },
+          "description": "Total number of seconds spent by all reads/writes divided by the total number of reads/writes completed successfully.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -2818,7 +2968,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 76
+            "y": 28
           },
           "id": 35,
           "options": {
@@ -4152,8 +4302,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -4261,8 +4410,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -4403,6 +4551,6 @@
   "timezone": "",
   "title": "Fly Instance",
   "uid": "fly-instance",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
