@@ -130,7 +130,7 @@
             "uid": "application_logs_vlog"
           },
           "editorMode": "code",
-          "expr": "fly.app.name: $app fly.app.instance: $instance _msg:$query|stats by (fly.app.name) count() as logs",
+          "expr": "fly.app.name: $app fly.app.instance: $instance $query|stats by (fly.app.name) count() as logs",
           "queryType": "statsRange",
           "refId": "A"
         }
@@ -166,7 +166,7 @@
             "type": "victoriametrics-logs-datasource",
             "uid": "application_logs_vlog"
           },
-          "expr": "fly.app.name:$app fly.app.instance:$instance _msg:$query",
+          "expr": "fly.app.name:$app fly.app.instance:$instance $query",
           "queryType": "instant",
           "refId": "A"
         }
